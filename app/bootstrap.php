@@ -2,6 +2,7 @@
     //load config
     require_once 'config/config.php';
     require_once 'helpers/session_helper.php';
+    require_once 'helpers/redirect_url.php';
 
     /* Autoload core Libraries and helpers if they exist.
     If by any chance you decide to create another directory
@@ -13,7 +14,7 @@
     $this->helper = new RedirectUrl;
     */
     spl_autoload_register( function ($class_name) {
-        $dirs = array('libraries', 'helpers');
+        $dirs = array('libraries');
 
         foreach ($dirs as $dir) {
             $CLASSES_DIR = __DIR__ . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR;  // or whatever your directory is

@@ -25,11 +25,30 @@
             }
         }
 
-        //Find user by email
-        public function findUserByEmail($email){
-            //Calling function/method query that comes from Database.php
+        //Login user
+        public function login($email, $password){
             $sql = 'SELECT * FROM users WHERE email = :email';
             $this->db->query($sql);
+            $this->db->bind(':email', $email);
+
+            $row = $this->db->single(); //call single function inside Database.php (retturn single row)
+
+            $hashed_password = $row->password; //give us the hash password
+            
+            //use this function to verify the password written in the form against hashed password found in db
+            if (password_verify($password, $hashed_password)) { 
+                # if match
+                return $row;
+            } else {
+                return false;
+            }
+        }
+    
+
+        //Find user by email
+        public function findUserByEmail($email){
+            $sql = 'SELECT * FROM users WHERE email = :email';
+            $this->db->query($sql); //Calling function/method query that comes from Database.php
             //bind values
             $this->db->bind(':email', $email);
 
