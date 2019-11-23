@@ -61,4 +61,18 @@
                 return false;
             }
         }
+
+        //Find user by ID
+        public function getUserById($id){
+            $sql = 'SELECT * FROM users WHERE id = :id';
+            $this->db->query($sql); //Calling function/method query that comes from Database.php
+            //bind values
+            $this->db->bind(':id', $id);
+
+            $row = $this->db->single();
+
+            return $row;
+
+        }
+
     }
